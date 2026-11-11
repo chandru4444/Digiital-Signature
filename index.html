@@ -1,13 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SecureSign - Digital Signature System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header class="navbar">
@@ -26,32 +27,30 @@
         <a href="#certificate">Key Details</a>
     </nav>
 
-    <div class="offline-badge">
-        <span class="online-dot"></span>
-        Offline Ready
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">🌙</button>
+        <div class="offline-badge">
+            <span class="online-dot"></span>
+            Offline Ready
+        </div>
     </div>
 </header>
-
 
 <main class="main-container">
 
     <!-- DASHBOARD -->
-
     <section id="dashboard" class="hero">
         <div>
             <span class="eyebrow">CRYPTOGRAPHIC SECURITY SYSTEM</span>
-
             <h2>
                 Digital Signature<br>
                 <span>Generation & Verification</span>
             </h2>
-
             <p>
                 Secure message authentication using RSA-PSS
                 and SHA-256 cryptographic algorithms.
             </p>
         </div>
-
         <div class="hero-icon">
             <div class="shield">✓</div>
             <span>SECURE SIGNATURE</span>
@@ -59,11 +58,8 @@
         </div>
     </section>
 
-
     <!-- DASHBOARD STATS -->
-
     <section class="stats-grid">
-
         <div class="stat-card">
             <div class="stat-icon blue">🔑</div>
             <div>
@@ -71,7 +67,6 @@
                 <h3>RSA-2048</h3>
             </div>
         </div>
-
         <div class="stat-card">
             <div class="stat-icon purple">#</div>
             <div>
@@ -79,7 +74,6 @@
                 <h3>SHA-256</h3>
             </div>
         </div>
-
         <div class="stat-card">
             <div class="stat-icon green">✓</div>
             <div>
@@ -87,7 +81,6 @@
                 <h3>RSA-PSS</h3>
             </div>
         </div>
-
         <div class="stat-card">
             <div class="stat-icon orange">🔒</div>
             <div>
@@ -95,513 +88,266 @@
                 <h3>Non-exportable</h3>
             </div>
         </div>
-
     </section>
 
-
     <!-- SENDER AND RECEIVER -->
-
     <section class="workspace">
 
         <!-- SENDER PANEL -->
-
         <div class="panel" id="sender">
-
             <div class="panel-heading">
                 <div class="heading-icon blue">01</div>
-
                 <div>
                     <h2>Sender Panel</h2>
                     <p>Generate keys and digitally sign your message.</p>
                 </div>
             </div>
 
-
-            <!-- SIGNER INFORMATION -->
-
             <div class="subsection">
-
                 <h3>01. Signer Information</h3>
-
                 <label for="signerName">Signer Name</label>
-
-                <input
-                    type="text"
-                    id="signerName"
-                    placeholder="Enter sender name"
-                    value="Demo Sender"
-                >
-
-                <p class="helper">
-                    Self-declared demo identity, not a verified certificate identity.
-                </p>
-
+                <input type="text" id="signerName" placeholder="Enter sender name" value="Demo Sender">
+                <p class="helper">Self-declared demo identity, not a verified certificate identity.</p>
             </div>
 
-
-            <!-- RSA KEY GENERATION -->
-
             <div class="subsection">
-
                 <h3>02. RSA Key Generation</h3>
-
-                <p class="description">
-                    Generate a mathematically related public and private key pair.
-                </p>
-
-                <button id="generateKeysBtn" class="primary-btn">
-                    Generate RSA Keys
-                </button>
-
+                <p class="description">Generate a mathematically related public and private key pair.</p>
+                <button id="generateKeysBtn" class="primary-btn">Generate RSA Keys</button>
                 <div id="keyProgress" class="progress-track">
                     <div id="keyProgressBar" class="progress-bar"></div>
                 </div>
-
-                <div id="keyStatus" class="status neutral">
-                    No keys generated yet.
-                </div>
-
+                <div id="keyStatus" class="status neutral">No keys generated yet.</div>
                 <label>Public Key (SPKI / Base64)</label>
-
-                <textarea
-                    id="publicKey"
-                    readonly
-                    placeholder="Public key will appear here..."
-                ></textarea>
-
+                <textarea id="publicKey" readonly placeholder="Public key will appear here..."></textarea>
                 <div class="private-notice">
                     🔒
                     <div>
                         <strong>Private Key Protected</strong>
-                        <p>
-                            Private key remains non-exportable in sender's browser memory.
-                            It is never transferred to the receiver.
-                        </p>
+                        <p>Private key remains non-exportable in sender's browser memory. It is never transferred to the receiver.</p>
                     </div>
                 </div>
-
             </div>
 
-
-            <!-- DIGITAL SIGNATURE GENERATION -->
-
             <div class="subsection">
-
                 <h3>03. Digital Signature Generation</h3>
-
-                <p class="description">
-                    Enter a message and sign it using the private key.
-                </p>
-
+                <p class="description">Enter a message and sign it using the private key.</p>
                 <label for="senderMessage">Original Message</label>
-
-                <textarea
-                    id="senderMessage"
-                    rows="4"
-                >Hello, this is my digital signature demonstration.</textarea>
-
-                <button id="signBtn" class="primary-btn">
-                    Generate Digital Signature
-                </button>
-
+                <textarea id="senderMessage" rows="4">Hello, this is my digital signature demonstration.</textarea>
+                <button id="signBtn" class="primary-btn">Generate Digital Signature</button>
                 <div id="signProgress" class="progress-track">
                     <div id="signProgressBar" class="progress-bar"></div>
                 </div>
-
-                <div id="signStatus" class="status neutral">
-                    Waiting for message signing.
-                </div>
-
+                <div id="signStatus" class="status neutral">Waiting for message signing.</div>
                 <label>SHA-256 Message Hash</label>
-
-                <div id="hashOutput" class="output">
-                    Hash will appear here...
-                </div>
-
+                <div id="hashOutput" class="output">Hash will appear here...</div>
                 <label>Digital Signature (Base64)</label>
-
-                <textarea
-                    id="signatureOutput"
-                    readonly
-                    placeholder="Signature will appear here..."
-                ></textarea>
-
+                <textarea id="signatureOutput" readonly placeholder="Signature will appear here..."></textarea>
             </div>
-
-
-            <!-- DOWNLOAD -->
 
             <div class="subsection">
-
                 <h3>04. Export Verification Files</h3>
-
-                <p class="description">
-                    Download the public key and signature for the receiver.
-                </p>
-
+                <p class="description">Download the public key and signature for the receiver.</p>
                 <div class="button-grid">
-
-                    <button
-                        id="downloadPublicKeyBtn"
-                        class="secondary-btn"
-                        disabled
-                    >
-                        ↓ Public Key
-                    </button>
-
-                    <button
-                        id="downloadSignatureBtn"
-                        class="secondary-btn"
-                        disabled
-                    >
-                        ↓ Digital Signature
-                    </button>
-
+                    <button id="downloadPublicKeyBtn" class="secondary-btn" disabled>↓ Public Key</button>
+                    <button id="downloadSignatureBtn" class="secondary-btn" disabled>↓ Digital Signature</button>
                 </div>
-
-                <div id="downloadStatus" class="status neutral">
-                    Generate keys and signature before downloading.
-                </div>
-
+                <div id="downloadStatus" class="status neutral">Generate keys and signature before downloading.</div>
             </div>
-
         </div>
 
-
         <!-- RECEIVER PANEL -->
-
         <div class="panel" id="receiver">
-
             <div class="panel-heading">
                 <div class="heading-icon green">02</div>
-
                 <div>
                     <h2>Receiver Panel</h2>
                     <p>Import sender information and verify the signature.</p>
                 </div>
             </div>
 
-
-            <!-- RECEIVED MESSAGE -->
-
             <div class="subsection">
-
                 <h3>01. Received Message</h3>
-
-                <label for="receiverMessage">
-                    Message Received from Sender
-                </label>
-
-                <textarea
-                    id="receiverMessage"
-                    rows="4"
-                    placeholder="Paste the original message received from sender..."
-                ></textarea>
-
+                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                    <button id="autoFillBtn" class="secondary-btn" style="padding: 6px 10px; font-size: 10px;">⚡ Auto-Fill Sender Data</button>
+                </div>
+                <label for="receiverMessage">Message Received from Sender</label>
+                <textarea id="receiverMessage" rows="4" placeholder="Paste the original message received from sender..."></textarea>
             </div>
 
-
-            <!-- IMPORT PUBLIC KEY -->
-
             <div class="subsection">
-
                 <h3>02. Import Sender's Public Key</h3>
-
-                <label for="publicKeyFile">
-                    Upload Public Key (.txt)
-                </label>
-
-                <input
-                    type="file"
-                    id="publicKeyFile"
-                    accept=".txt"
-                >
-
-                <div id="publicKeyStatus" class="status neutral">
-                    Public key not imported.
-                </div>
-
-                <!-- IMPORTANT: These two textareas were missing previously -->
-
+                <label for="publicKeyFile">Upload Public Key (.txt)</label>
+                <input type="file" id="publicKeyFile" accept=".txt">
+                <div id="publicKeyStatus" class="status neutral">Public key not imported.</div>
+                
                 <label>Imported Public Key</label>
-
-                <textarea
-                    id="receiverPublicKey"
-                    readonly
-                    placeholder="Imported public key will appear here..."
-                ></textarea>
-
+                <textarea id="receiverPublicKey" readonly placeholder="Imported public key will appear here..."></textarea>
+                
                 <div class="key-info-card">
-
                     <div class="info-row">
                         <span>Algorithm</span>
                         <strong id="receiverAlgorithm">Not available</strong>
                     </div>
-
                     <div class="info-row">
                         <span>Key Size</span>
                         <strong id="receiverKeySize">Not available</strong>
                     </div>
-
                     <div class="info-row">
                         <span>Key Fingerprint</span>
                         <code id="receiverFingerprint">Not available</code>
                     </div>
-
                 </div>
 
+                <label for="expectedFingerprint">Expected Fingerprint (Optional Check)</label>
+                <input type="text" id="expectedFingerprint" placeholder="Paste expected fingerprint here to verify identity...">
             </div>
 
-
-            <!-- IMPORT SIGNATURE -->
-
             <div class="subsection">
-
                 <h3>03. Import Digital Signature</h3>
-
-                <label for="signatureFile">
-                    Upload Digital Signature (.txt)
-                </label>
-
-                <input
-                    type="file"
-                    id="signatureFile"
-                    accept=".txt"
-                >
-
-                <div id="signatureStatus" class="status neutral">
-                    Signature not imported.
-                </div>
-
-                <!-- IMPORTANT: This textarea was also missing previously -->
-
+                <label for="signatureFile">Upload Digital Signature (.txt)</label>
+                <input type="file" id="signatureFile" accept=".txt">
+                <div id="signatureStatus" class="status neutral">Signature not imported.</div>
                 <label>Imported Digital Signature</label>
-
-                <textarea
-                    id="receiverSignature"
-                    readonly
-                    placeholder="Imported signature will appear here..."
-                ></textarea>
-
+                <textarea id="receiverSignature" readonly placeholder="Imported signature will appear here..."></textarea>
             </div>
 
-
-            <!-- VERIFICATION -->
-
             <div class="subsection">
-
                 <h3>04. Signature Verification</h3>
-
-                <p class="description">
-                    Verify the received message using the sender's public key.
-                </p>
-
-                <button id="verifyBtn" class="verify-btn">
-                    Verify Digital Signature
-                </button>
-
+                <p class="description">Verify the received message using the sender's public key.</p>
+                <div class="verify-actions">
+                    <button id="verifyBtn" class="verify-btn">Verify Digital Signature</button>
+                    <button id="tamperBtn" class="tamper-btn" title="Simulate a tampered message">🔨 Tamper Message</button>
+                </div>
                 <div id="verifyProgress" class="progress-track">
                     <div id="verifyProgressBar" class="progress-bar"></div>
                 </div>
-
-                <div id="verificationResult" class="verification-result neutral">
+                <div id="verificationResult" class="verification-result neutral" aria-live="polite">
                     <div class="result-icon">?</div>
                     <h3>Awaiting Verification</h3>
                     <p>Import the required files to begin verification.</p>
                 </div>
-
             </div>
-
         </div>
-
     </section>
 
-
     <!-- KEY AND CERTIFICATE INFORMATION -->
-
     <section id="certificate" class="panel report-panel">
-
         <div class="panel-heading">
-
             <div class="heading-icon purple">03</div>
-
             <div>
                 <h2>Cryptographic Key & Certificate Information</h2>
                 <p>Technical details about the signing key.</p>
             </div>
-
         </div>
 
         <div class="details-grid">
-
             <div class="detail-card">
                 <span>Signer Name</span>
                 <strong id="reportSigner">Not available</strong>
             </div>
-
             <div class="detail-card">
                 <span>Signature Algorithm</span>
                 <strong>RSA-PSS</strong>
             </div>
-
             <div class="detail-card">
                 <span>Key Length</span>
                 <strong>2048 bits</strong>
             </div>
-
             <div class="detail-card">
                 <span>Hash Algorithm</span>
                 <strong>SHA-256</strong>
             </div>
-
             <div class="detail-card full-width">
                 <span>Public Key Fingerprint (SHA-256)</span>
                 <code id="reportFingerprint">Not available</code>
             </div>
-
-            <div class="detail-card">
-                <span>Certificate Status</span>
-                <strong class="warning-text">Verified</strong>
-            </div>
-
-            <div class="detail-card">
-                <span>Identity Status</span>
-                <strong class="warning-text">Self-declared </strong>
-            </div>
-
         </div>
-
-       
-
     </section>
 
-
     <!-- VERIFICATION REPORT -->
-
     <section class="panel report-panel" id="report">
-
         <div class="panel-heading">
-
             <div class="heading-icon orange">04</div>
-
             <div>
                 <h2>Verification Report</h2>
                 <p>Detailed results of the latest verification attempt.</p>
             </div>
-
         </div>
 
         <div class="report-banner neutral" id="reportBanner">
-
             <span class="report-banner-icon">?</span>
-
             <div>
                 <h3 id="reportHeading">No Verification Performed</h3>
-
-                <p id="reportDescription">
-                    The report will appear after verification.
-                </p>
+                <p id="reportDescription">The report will appear after verification.</p>
             </div>
-
         </div>
 
         <div class="report-table">
-
             <div class="report-row">
                 <span>Signature Validity</span>
                 <strong id="reportValidity">Pending</strong>
             </div>
-
             <div class="report-row">
                 <span>Message Integrity</span>
                 <strong id="reportIntegrity">Pending</strong>
             </div>
-
             <div class="report-row">
                 <span>Signature Algorithm</span>
                 <strong>RSA-PSS</strong>
             </div>
-
             <div class="report-row">
                 <span>Hash Algorithm</span>
                 <strong>SHA-256</strong>
             </div>
-
             <div class="report-row">
                 <span>RSA Key Size</span>
                 <strong>2048 bits</strong>
             </div>
-
             <div class="report-row">
                 <span>Certificate Trust</span>
                 <strong class="warning-text">Not validated</strong>
             </div>
-
             <div class="report-row">
                 <span>Verification Timestamp</span>
                 <strong id="reportTimestamp">Not available</strong>
             </div>
-
         </div>
 
-        <button
-            id="downloadReportBtn"
-            class="secondary-btn"
-            disabled
-        >
-            ↓ Download Verification Report
-        </button>
-
+        <button id="downloadReportBtn" class="secondary-btn" disabled>↓ Download Verification Report</button>
     </section>
 
-
     <!-- HOW IT WORKS -->
-
     <section class="panel info-panel">
-
         <h2>How Digital Signature Works</h2>
-
         <div class="workflow-grid">
-
             <div class="workflow-card">
                 <span>01</span>
                 <h3>Key Generation</h3>
                 <p>Generate RSA public and private keys.</p>
             </div>
-
             <div class="workflow-card">
                 <span>02</span>
                 <h3>Hashing</h3>
                 <p>SHA-256 generates the message digest.</p>
             </div>
-
             <div class="workflow-card">
                 <span>03</span>
                 <h3>Signing</h3>
                 <p>Private key creates the signature.</p>
             </div>
-
             <div class="workflow-card">
                 <span>04</span>
                 <h3>Verification</h3>
                 <p>Public key verifies the signature.</p>
             </div>
-
         </div>
-
     </section>
 
-
     <div class="reset-container">
-
-        <button id="resetBtn" class="reset-btn">
-            ↻ Reset / New Transaction
-        </button>
-
+        <button id="resetBtn" class="reset-btn">↻ Reset / New Transaction</button>
     </div>
-
 </main>
-
 
 <footer>
     <strong>SecureSign</strong>
@@ -610,8 +356,6 @@
     <small>Educational cryptographic demonstration.</small>
 </footer>
 
-
 <script src="script.js"></script>
-
 </body>
 </html>
